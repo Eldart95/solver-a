@@ -1,104 +1,93 @@
-
-#include <complex>
+#pragma once
 #include <string>
+#include <cmath>
 namespace solver{
-
-    double solve(std::string a);
+    // class ComplexVariable{
+    //     std::complex<double> cv;
+    // };
     
-    struct RealVariable{
-        double coef;
+    
+    class RealVariable{
+        public:
+        double coef=1;
+        int power=1;
+        double rem=0;
     };
-    class ComplexVariable{
-        std::complex<double> cv;
-    };
+    double solve(RealVariable& x);
+    
     ////////////////////////////REAL VARIABLES OPERATORS OVERRIDE////////////////////////////
-    RealVariable operator/(RealVariable x,double y){
-        return x;
-
-    }
-    RealVariable operator+(RealVariable x,RealVariable y){
-        return y;
-
-    }
-    RealVariable operator+(RealVariable x,double y){
-    return x;
-
-    }
-    RealVariable operator+(int y,RealVariable x){
-    return x;
-
-    }
-
-    RealVariable operator*(int x,RealVariable y){
-        y.coef = x;
-        return y;
-
+    //+
+    RealVariable& operator+(const int y,RealVariable& x);
+    RealVariable& operator+(RealVariable& x,const int y);
+    RealVariable& operator+(RealVariable& x,RealVariable& y);
+    //*
+    RealVariable& operator*(const int y,RealVariable& x);
+    RealVariable& operator*(RealVariable& x,const int y);
+    RealVariable& operator*(RealVariable& x,RealVariable& y);
+    ///
+    RealVariable& operator/(RealVariable& x,const double y);
+    RealVariable& operator/(const double y,RealVariable& x);
+    RealVariable& operator/(RealVariable& x,RealVariable& y);
+    //-
+    RealVariable& operator-(RealVariable& x,const int y);
+    RealVariable& operator-(RealVariable& x,RealVariable& y);
+    RealVariable& operator-(const int y,RealVariable& x);
+    //^
+    RealVariable& operator^(RealVariable& x,const int y);
+    //==
+    RealVariable& operator==(RealVariable& x, const int y); 
+    RealVariable& operator==(RealVariable& x, const RealVariable& y);
+    RealVariable& operator==(const int y,RealVariable& x);
+    //
     
-    }
-    RealVariable operator-(RealVariable x,const int y){
-        return x;
-
-
-    }
-    RealVariable operator-(RealVariable x,RealVariable y){
-        return x;
-
-
-    }
-    std::string operator==(const RealVariable x,const int y){
-        return "";
-
-    } 
-        
-    RealVariable operator^(RealVariable x,int y){
-        return x;
-
-    } 
-    std::string operator==(const RealVariable x, const RealVariable y) {}
-
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////COMPLEX VARIABLE OPERATOR OVERRIDE//////////////////////////////////
 
-    ComplexVariable operator*(const int x,ComplexVariable y){}
+    // double operator*(const int x,ComplexVariable y){
+    //     return 1;
+    // }
 
-    ComplexVariable operator-(const ComplexVariable x,const int y){}
+    // double operator-(const ComplexVariable x,const int y){
+    //     return 1;
+    // }
 
-    ComplexVariable operator^(ComplexVariable x,int y){
-        return x;
+    // ComplexVariable operator^(ComplexVariable x,int y){
+    //     return x;
 
-    } 
-    std::string operator==(const ComplexVariable x,const int y){
-        return "";
+    // } 
+    // std::string operator==(const ComplexVariable x,const int y){
+    //     return "";
 
-    }
-    std::string operator==(const ComplexVariable x,const ComplexVariable y){
-        return "";
+    // }
+    // std::string operator==(const ComplexVariable x,const ComplexVariable y){
+    //     return "";
 
-    }     
-    ComplexVariable operator+(ComplexVariable x,ComplexVariable y){
-        return y;
+    // }     
+    // ComplexVariable operator+(ComplexVariable x,ComplexVariable y){
+    //     return y;
 
-    }
-    ComplexVariable operator-(ComplexVariable x,ComplexVariable y){
-        return y;
+    // }
+    // ComplexVariable operator-(ComplexVariable x,ComplexVariable y){
+    //     return y;
 
-    }    
-    ComplexVariable operator+(ComplexVariable x,const int y){
-        return x;
+    // }    
+    // ComplexVariable operator+(ComplexVariable x,const int y){
+    //     return x;
 
-    }
-    ComplexVariable operator/(ComplexVariable x,const int y){
-        return x;
+    // }
+    // ComplexVariable operator/(ComplexVariable x,const int y){
+    //     return x;
 
-    }
-    ComplexVariable operator+(int y,ComplexVariable x){
-        return x;
+    // }
+    // ComplexVariable operator+(int y,ComplexVariable x){
+    //     return x;
 
-    }
-    double operator+(int y,std::complex<double> x){
-        return 3;
+    // }
+    // double operator+(int y,std::complex<double> x){
+    //     return 3;
 
-    }    
+    // }    
 }
 
 
