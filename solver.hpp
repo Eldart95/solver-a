@@ -1,93 +1,78 @@
 #pragma once
-#include <string>
 #include <cmath>
+#include <complex>
 namespace solver{
-    // class ComplexVariable{
-    //     std::complex<double> cv;
-    // };
+
     
     
     class RealVariable{
         public:
-        double coef=1;
-        int power=1;
-        double rem=0;
+        double a;
+        int b;
+        double c;
+
+        RealVariable() =default;
+
+            ////////////////////////////REAL VARIABLES OPERATORS OVERRIDE////////////////////////////
+        //+
+        friend RealVariable& operator+(int y,RealVariable& x);
+        friend RealVariable& operator+(RealVariable& x,int y);
+        friend RealVariable& operator+(RealVariable& x,RealVariable& y);
+        //*
+        friend RealVariable& operator*(int y,RealVariable& x);
+        friend RealVariable& operator*(RealVariable& x, int y);
+        friend RealVariable& operator*(RealVariable& x,RealVariable& y);
+        ///
+        friend RealVariable& operator/(RealVariable& x,double y);
+        friend RealVariable& operator/(double y,RealVariable& x);
+        friend RealVariable& operator/(RealVariable& x,RealVariable& y);
+        //-
+        friend RealVariable& operator-(RealVariable& x,int y);
+        friend RealVariable& operator-(RealVariable& x,RealVariable& y);
+        friend RealVariable& operator-(int y,RealVariable& x);
+        //^
+        friend RealVariable& operator^(RealVariable& x,int y);
+        //==
+        friend RealVariable& operator==(RealVariable& x,  int y); 
+        friend RealVariable& operator==(RealVariable& x,RealVariable& y);
+        friend RealVariable& operator==(int y,RealVariable& x);
+        //
+    
     };
     double solve(RealVariable& x);
     
-    ////////////////////////////REAL VARIABLES OPERATORS OVERRIDE////////////////////////////
-    //+
-    RealVariable& operator+(const int y,RealVariable& x);
-    RealVariable& operator+(RealVariable& x,const int y);
-    RealVariable& operator+(RealVariable& x,RealVariable& y);
-    //*
-    RealVariable& operator*(const int y,RealVariable& x);
-    RealVariable& operator*(RealVariable& x,const int y);
-    RealVariable& operator*(RealVariable& x,RealVariable& y);
-    ///
-    RealVariable& operator/(RealVariable& x,const double y);
-    RealVariable& operator/(const double y,RealVariable& x);
-    RealVariable& operator/(RealVariable& x,RealVariable& y);
-    //-
-    RealVariable& operator-(RealVariable& x,const int y);
-    RealVariable& operator-(RealVariable& x,RealVariable& y);
-    RealVariable& operator-(const int y,RealVariable& x);
-    //^
-    RealVariable& operator^(RealVariable& x,const int y);
-    //==
-    RealVariable& operator==(RealVariable& x, const int y); 
-    RealVariable& operator==(RealVariable& x, const RealVariable& y);
-    RealVariable& operator==(const int y,RealVariable& x);
-    //
+    class ComplexVariable{
+        public:
+        std::complex<double> a,b,c;
+        ComplexVariable()=default;
+
+        friend ComplexVariable& operator+(int y,ComplexVariable& x);
+        friend ComplexVariable& operator+(ComplexVariable& x,int y);
+        friend ComplexVariable& operator+(ComplexVariable& x,ComplexVariable& y);
+        //*
+        friend ComplexVariable& operator*(int y,ComplexVariable& x);
+        friend ComplexVariable& operator*(ComplexVariable& x, int y);
+        friend ComplexVariable& operator*(ComplexVariable& x,ComplexVariable& y);
+        ///
+        friend ComplexVariable& operator/(ComplexVariable& x, double y);
+        friend ComplexVariable& operator/(double y,ComplexVariable& x);
+        friend ComplexVariable& operator/(ComplexVariable& x,ComplexVariable& y);
+        //-
+        friend ComplexVariable& operator-(ComplexVariable& x,int y);
+        friend ComplexVariable& operator-(ComplexVariable& x,ComplexVariable& y);
+        friend ComplexVariable& operator-(int y,ComplexVariable& x);
+        //^
+        friend ComplexVariable& operator^(ComplexVariable& x,int y);
+        //==
+        friend ComplexVariable& operator==(ComplexVariable& x, int y); 
+        friend ComplexVariable& operator==(ComplexVariable& x,ComplexVariable& y);
+        friend ComplexVariable& operator==(int y,ComplexVariable& x);
     
+
     
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////COMPLEX VARIABLE OPERATOR OVERRIDE//////////////////////////////////
+    };
+    std::complex<double> solve(ComplexVariable& x);
 
-    // double operator*(const int x,ComplexVariable y){
-    //     return 1;
-    // }
-
-    // double operator-(const ComplexVariable x,const int y){
-    //     return 1;
-    // }
-
-    // ComplexVariable operator^(ComplexVariable x,int y){
-    //     return x;
-
-    // } 
-    // std::string operator==(const ComplexVariable x,const int y){
-    //     return "";
-
-    // }
-    // std::string operator==(const ComplexVariable x,const ComplexVariable y){
-    //     return "";
-
-    // }     
-    // ComplexVariable operator+(ComplexVariable x,ComplexVariable y){
-    //     return y;
-
-    // }
-    // ComplexVariable operator-(ComplexVariable x,ComplexVariable y){
-    //     return y;
-
-    // }    
-    // ComplexVariable operator+(ComplexVariable x,const int y){
-    //     return x;
-
-    // }
-    // ComplexVariable operator/(ComplexVariable x,const int y){
-    //     return x;
-
-    // }
-    // ComplexVariable operator+(int y,ComplexVariable x){
-    //     return x;
-
-    // }
-    // double operator+(int y,std::complex<double> x){
-    //     return 3;
-
-    // }    
 }
 
 

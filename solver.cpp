@@ -1,101 +1,160 @@
 #include "solver.hpp"
+using namespace std;
 using namespace solver;
 double solver::solve(RealVariable& x){
-    double ans =0;
-    x.rem=-x.rem;
-    if(x.power>2){} // throw error
-    if(x.power==2){
-        if(x.rem>0) ans = sqrt(x.rem);
-    }
-    if(x.power==1){
-        ans=x.rem/x.coef;
-    }
-    if(x.power<0){} //throw error.
+    return 1;
+
+
+}
+
+RealVariable& solver::operator+(RealVariable& x,RealVariable& y){
+    return x;
+}
+
+RealVariable& solver::operator+(RealVariable& x,int y){
     
-    x.rem=0;
-    x.coef=1;
-    x.power=1;
-    return ans;
+    return x;
 
-    }
+}
+RealVariable& solver::operator+(int y,RealVariable& x){
 
-    RealVariable& solver::operator+(RealVariable& x,RealVariable& y){
-        if(x.power==y.power) x.coef=x.coef+y.coef;
+    return x;
+
+}
+
+RealVariable& solver::operator*(int x,RealVariable& y){
+    return y;
+}
+
+RealVariable& solver::operator*(RealVariable& x,RealVariable& y){
+    return y;
+}
+
+RealVariable& solver::operator*(RealVariable& y,int x){
+    return y;
+}
+RealVariable& solver::operator/(RealVariable& x,double y){
+    return x;
+
+}
+RealVariable& solver::operator/(RealVariable& x,RealVariable& y){
         //to be cont..
-        return x;
+    return x;
+
+}
+RealVariable& solver::operator/(double x,RealVariable& y){
+        //to be cont..
+    return y;
 
     }
-    RealVariable& solver::operator+(RealVariable& x,int y){
-    x.rem+=y;
+RealVariable& solver::operator-(RealVariable& x, int y){
     return x;
 
     }
-    RealVariable& solver::operator+(int y,RealVariable& x){
-    x.rem+=y;
+RealVariable& solver::operator-(int x,RealVariable& y){
+        //to be cont..
+    return y;
+}
+RealVariable& solver::operator-(RealVariable& x,RealVariable& y){
+        //to be cont..
+    return x;
+}
+        
+RealVariable& solver::operator^(RealVariable& x,int y){
+    return x;
+
+} 
+RealVariable& solver::operator==(RealVariable& x, RealVariable& y) {
+        //to be contd..
+    return x;
+}
+RealVariable& solver::operator==(int x,RealVariable& y) {
+        //to be contd..
+    return y;
+}
+RealVariable& solver::operator==(RealVariable& x, int y) {
+
+    return x;
+        
+}
+
+//-----------------------------------------------------------------------------\\
+
+std::complex<double> solver::solve(ComplexVariable& x){
+    return 0;
+
+}
+
+ComplexVariable& solver::operator+(ComplexVariable& x,ComplexVariable& y){
+    return x;
+}
+
+ComplexVariable& solver::operator+(ComplexVariable& x,int y){
+    
+    return x;
+
+}
+ComplexVariable& solver::operator+(int y,ComplexVariable& x){
+
+    return x;
+
+}
+
+ComplexVariable& solver::operator*(int x,ComplexVariable& y){
+    return y;
+}
+
+ComplexVariable& solver::operator*(ComplexVariable& x,ComplexVariable& y){
+    return y;
+}
+
+ComplexVariable& solver::operator*(ComplexVariable& y,int x){
+    return y;
+}
+ComplexVariable& solver::operator/(ComplexVariable& x,double y){
+    return x;
+
+}
+ComplexVariable& solver::operator/(ComplexVariable& x,ComplexVariable& y){
+        //to be cont..
+    return x;
+
+}
+ComplexVariable& solver::operator/(double x,ComplexVariable& y){
+        //to be cont..
+    return y;
+
+    }
+ComplexVariable& solver::operator-(ComplexVariable& x, int y){
     return x;
 
     }
-
-    RealVariable& solver::operator*(int x,RealVariable& y){
-        y.coef = x;
-        return y;
-    }
-    RealVariable& solver::operator*(RealVariable& x,RealVariable& y){
+ComplexVariable& solver::operator-(int x,ComplexVariable& y){
         //to be cont..
-        return y;
-    }
-    RealVariable& solver::operator*(RealVariable& y,int x){
-        y.coef = x;
-        return y;
-    }
-    RealVariable& solver::operator/(RealVariable& x,double y){
-        x.coef/=y;
-        return x;
-
-    }
-    RealVariable& solver::operator/(RealVariable& x,RealVariable& y){
+    return y;
+}
+ComplexVariable& solver::operator-(ComplexVariable& x,ComplexVariable& y){
         //to be cont..
-        return x;
-
-    }
-    RealVariable& solver::operator/(double x,RealVariable& y){
-        //to be cont..
-        return y;
-
-    }
-    RealVariable& solver::operator-(RealVariable& x,const int y){
-        x.rem=-y;
-        return x;
-
-
-    }
-    RealVariable& solver::operator-(const int x,RealVariable& y){
-        //to be cont..
-        return y;
-    }
-    RealVariable& solver::operator-(RealVariable& x,RealVariable& y){
-        //to be cont..
-        return x;
-    }
+    return x;
+}
         
-    RealVariable& solver::operator^(RealVariable& x,int y){
-        x.power=y;
-        return x;
+ComplexVariable& solver::operator^(ComplexVariable& x,int y){
+    return x;
 
-    } 
-    RealVariable& solver::operator==(RealVariable& x, const RealVariable& y) {
+} 
+ComplexVariable& solver::operator==(ComplexVariable& x, ComplexVariable& y) {
         //to be contd..
-        return x;
-    }
-    RealVariable& solver::operator==(int x,RealVariable& y) {
+    return x;
+}
+ComplexVariable& solver::operator==(int x,ComplexVariable& y) {
         //to be contd..
-        return y;
-    }
-    RealVariable& solver::operator==(RealVariable& x, int y) {
-        y>0?x.rem-=y:x.rem+=y;
-        return x;
+    return y;
+}
+ComplexVariable& solver::operator==(ComplexVariable& x, int y) {
+
+    return x;
         
-    }
+}
 
 
 
