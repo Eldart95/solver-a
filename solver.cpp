@@ -99,6 +99,14 @@ ComplexVariable& solver::operator+(int y,ComplexVariable& x){
     return x;
 
 }
+ComplexVariable& solver::operator+(std::complex<double> y,ComplexVariable& x){
+    return x;
+}
+
+
+ComplexVariable& solver::operator+(ComplexVariable& x,std::complex<double> y){
+    return x;
+}
 
 ComplexVariable& solver::operator*(int x,ComplexVariable& y){
     return y;
@@ -154,6 +162,14 @@ ComplexVariable& solver::operator==(ComplexVariable& x, int y) {
 
     return x;
         
+}
+ComplexVariable& solver::operator==(ComplexVariable& x,std::complex<double>){
+
+    return x;
+}
+
+ComplexVariable& solver::operator==(std::complex<double> y,ComplexVariable& x){
+    return x;
 }
 
 
