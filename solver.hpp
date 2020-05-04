@@ -7,35 +7,36 @@ namespace solver{
     
     class RealVariable{
         public:
-        double a;
-        int b;
-        double c;
+        double a=0;
+        double b=1;
+        double c=0;
+        int power =1;
 
         RealVariable() =default;
 
             ////////////////////////////REAL VARIABLES OPERATORS OVERRIDE////////////////////////////
         //+
-        friend RealVariable& operator+(int y,RealVariable& x);
-        friend RealVariable& operator+(RealVariable& x,int y);
+        friend RealVariable& operator+(double y,RealVariable& x);
+        friend RealVariable& operator+(RealVariable& x,double y);
         friend RealVariable& operator+(RealVariable& x,RealVariable& y);
         //*
-        friend RealVariable& operator*(int y,RealVariable& x);
-        friend RealVariable& operator*(RealVariable& x, int y);
+        friend RealVariable& operator*(double y,RealVariable& x);
+        friend RealVariable& operator*(RealVariable& x, double y);
         friend RealVariable& operator*(RealVariable& x,RealVariable& y);
         ///
         friend RealVariable& operator/(RealVariable& x,double y);
         friend RealVariable& operator/(double y,RealVariable& x);
         friend RealVariable& operator/(RealVariable& x,RealVariable& y);
         //-
-        friend RealVariable& operator-(RealVariable& x,int y);
+        friend RealVariable& operator-(RealVariable& x,double y);
         friend RealVariable& operator-(RealVariable& x,RealVariable& y);
-        friend RealVariable& operator-(int y,RealVariable& x);
+        friend RealVariable& operator-(double y,RealVariable& x);
         //^
-        friend RealVariable& operator^(RealVariable& x,int y);
+        friend RealVariable& operator^(RealVariable& x,double y);
         //==
-        friend RealVariable& operator==(RealVariable& x,  int y); 
+        friend RealVariable& operator==(RealVariable& x,  double y); 
         friend RealVariable& operator==(RealVariable& x,RealVariable& y);
-        friend RealVariable& operator==(int y,RealVariable& x);
+        friend RealVariable& operator==(double y,RealVariable& x);
         //
     
     };
