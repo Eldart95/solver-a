@@ -197,95 +197,227 @@ RealVariable& solver::operator==(RealVariable& x, double y) {
 //-----------------------------------------------------------------------------\\
 
 std::complex<double> solver::solve(ComplexVariable& x){
-    return 0;
+    if(x.a==0 && x.b==0) throw new Mexception();
+    if(x.b==0 && x.c>0 && x.power==2){
+        if(x.a==1){
+            return std::complex<double> (0,sqrt(x.c));
+        }
+        else {
+            x.c/=x.a;
+            return std::complex<double> (0,sqrt(x.c));
+        }
+    }
+    double discriminant = x.b*x.b - 4*x.a*x.c;
+    std::complex<double> x1;
+    
+    double img,real;
+    if(x.power==1){
+        return -x.c/x.b;
+    }
+    if(discriminant>=0) { 
+        x1 = (-x.b + sqrt(discriminant)) / (2*x.a);
+    }
+    else {
+        real = -x.b/(2*x.a);
+        img =sqrt(-discriminant)/(2*x.a);
+        std::complex<double> x2 = (real,img);
+        return x2;
+    }
+    return x1;
 
 }
 
 ComplexVariable& solver::operator+(ComplexVariable& x,ComplexVariable& y){
-    return x;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    temp->c=x.c;
+    temp->power=x.power;
+    if(temp->power==y.power){
+        temp->a+=y.a;
+    }
+    temp->b+=y.b;
+    temp->c+=y.c;
+    return *temp;
 }
 
 ComplexVariable& solver::operator+(ComplexVariable& x,int y){
-    
-    return x;
+    return (y+x);
 
 }
 ComplexVariable& solver::operator+(int y,ComplexVariable& x){
-
-    return x;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    temp->c=x.c+y;
+    temp->power=x.power;
+    return *temp;
 
 }
 ComplexVariable& solver::operator+(std::complex<double> y,ComplexVariable& x){
-    return x;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    //temp->c=x.c+y;
+    temp->power=x.power;
+    return *temp;
 }
 
 
 ComplexVariable& solver::operator+(ComplexVariable& x,std::complex<double> y){
-    return x;
+    return (y+x);
 }
 
 ComplexVariable& solver::operator*(int x,ComplexVariable& y){
-    return y;
+    ComplexVariable* temp =new ComplexVariable();
+    temp->a=y.a;
+    temp->b=y.b;
+    temp->power=y.power;
+    temp->c=y.c;
+    
+    if(y.power==2) {
+        if(y.a==1){
+            temp->a=x;
+        }
+        else y.a*=x;
+    }
+    else if(y.b==1){
+        temp->b=x;
+    }
+    else {
+        temp->b+=x;
+    }
+
+    return *temp;
 }
 
 ComplexVariable& solver::operator*(ComplexVariable& x,ComplexVariable& y){
-    return y;
+    return x;
 }
 
 ComplexVariable& solver::operator*(ComplexVariable& y,int x){
-    return y;
+    return x*y;
 }
 ComplexVariable& solver::operator/(ComplexVariable& x,double y){
-    return x;
+    if(y==0) throw new Mexception();
+    ComplexVariable* temp= new ComplexVariable();
+    temp->a=x.a/y;
+    temp->b=x.b/y;
+    temp->power=x.power;
+    temp->c=x.c/y;
+    return *temp;
 
 }
 ComplexVariable& solver::operator/(ComplexVariable& x,ComplexVariable& y){
-        //to be cont..
+    
     return x;
 
 }
-ComplexVariable& solver::operator/(double x,ComplexVariable& y){
-        //to be cont..
-    return y;
+ComplexVariable& solver::operator/(double y,ComplexVariable& x){
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=y/x.a;
+    temp->b=y/x.b;
+    temp->power=x.power;
+    temp->c=y/x.c;
+    return *temp;
 
     }
 ComplexVariable& solver::operator-(ComplexVariable& x, int y){
-    return x;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    temp->c=x.c-y;
+    temp->power=x.power;
+    return *temp;
 
     }
 ComplexVariable& solver::operator-(int x,ComplexVariable& y){
-        //to be cont..
-    return y;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=y.a;
+    temp->b=y.b;
+    temp->power=y.power;
+    temp->c=-y.c-x;
+    return *temp;
 }
+
 ComplexVariable& solver::operator-(ComplexVariable& x,ComplexVariable& y){
-        //to be cont..
-    return x;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    temp->c=x.c;
+    temp->power=x.power;
+    if(x.power==y.power){
+        temp->a-=y.a;
+    }
+    temp->b-=y.b;
+    temp->c-=y.c;
+    return *temp;
 }
         
 ComplexVariable& solver::operator^(ComplexVariable& x,int y){
-    return x;
+    if(y<1 || y>2) throw new Mexception();
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=1;
+    temp->b=0;
+    temp->power=2;
+    temp->c=x.c;
+    return *temp;
+
 
 } 
 ComplexVariable& solver::operator==(ComplexVariable& x, ComplexVariable& y) {
-        //to be contd..
-    return x;
+    ComplexVariable* temp = new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    temp->c=x.c;
+    temp->power=x.power;
+    if(y.power==x.power){
+        if(y.a>0){
+            temp->a-=y.a;
+        }
+        else {
+            temp->a+=y.a;
+        }
+    }
+    if(y.b>0){
+        temp->b-=y.b;
+    }
+    else {
+        temp->b+=-y.b;
+    }
+    if(y.c>0){
+        temp->c-=y.c;
+    }
+    else{
+        temp->c+=-y.c;
+    }
+
+    return *temp;
 }
 ComplexVariable& solver::operator==(int x,ComplexVariable& y) {
-        //to be contd..
-    return y;
+    return y==x;
 }
 ComplexVariable& solver::operator==(ComplexVariable& x, int y) {
-
-    return x;
+    ComplexVariable* temp= new ComplexVariable();
+    temp->a=x.a;
+    temp->b=x.b;
+    temp->power=x.power;
+    temp->c=x.c;
+    if(y>0){
+        temp->c-=y;
+    }
+    else {
+        temp->c+=-y;
+    }
+    return *temp;
         
 }
-ComplexVariable& solver::operator==(ComplexVariable& x,std::complex<double>){
-
+ComplexVariable& solver::operator==(ComplexVariable& x,std::complex<double> y){
     return x;
 }
 
 ComplexVariable& solver::operator==(std::complex<double> y,ComplexVariable& x){
-    return x;
+    return x==y;
 }
 
 

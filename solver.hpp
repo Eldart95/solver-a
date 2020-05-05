@@ -44,7 +44,11 @@ namespace solver{
     
     class ComplexVariable{
         public:
-        std::complex<double> a,b,c;
+        double a=0;
+        double b=1;
+        double c=0;
+        int power = 1;
+
         ComplexVariable()=default;
 
         friend ComplexVariable& operator+(int y,ComplexVariable& x);
