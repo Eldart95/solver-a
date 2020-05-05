@@ -46,7 +46,7 @@ namespace solver{
         public:
         double a=0;
         double b=1;
-        double c=0;
+        std::complex<double> c=(0,0);
         int power = 1;
 
         ComplexVariable()=default;

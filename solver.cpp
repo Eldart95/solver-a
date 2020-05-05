@@ -198,16 +198,16 @@ RealVariable& solver::operator==(RealVariable& x, double y) {
 
 std::complex<double> solver::solve(ComplexVariable& x){
     if(x.a==0 && x.b==0) throw new Mexception();
-    if(x.b==0 && x.c>0 && x.power==2){
+    if(x.b==0 && x.c.real()>0 && x.power==2){
         if(x.a==1){
-            return std::complex<double> (0,sqrt(x.c));
+            return std::complex<double> (0,sqrt(x.c.real()));
         }
         else {
             x.c/=x.a;
-            return std::complex<double> (0,sqrt(x.c));
+            return std::complex<double> (0,sqrt(x.c.real()));
         }
     }
-    double discriminant = x.b*x.b - 4*x.a*x.c;
+    double discriminant = x.b*x.b - 4*x.a*x.c.real();
     std::complex<double> x1;
     
     double img,real;
@@ -249,7 +249,7 @@ ComplexVariable& solver::operator+(int y,ComplexVariable& x){
     ComplexVariable* temp = new ComplexVariable();
     temp->a=x.a;
     temp->b=x.b;
-    temp->c=x.c+y;
+    temp->c=x.c.real()+y;
     temp->power=x.power;
     return *temp;
 
@@ -258,7 +258,7 @@ ComplexVariable& solver::operator+(std::complex<double> y,ComplexVariable& x){
     ComplexVariable* temp = new ComplexVariable();
     temp->a=x.a;
     temp->b=x.b;
-    //temp->c=x.c+y;
+    temp->c=x.c+y;
     temp->power=x.power;
     return *temp;
 }
@@ -326,7 +326,7 @@ ComplexVariable& solver::operator-(ComplexVariable& x, int y){
     ComplexVariable* temp = new ComplexVariable();
     temp->a=x.a;
     temp->b=x.b;
-    temp->c=x.c-y;
+    temp->c=x.c.real()-y;
     temp->power=x.power;
     return *temp;
 
@@ -336,7 +336,7 @@ ComplexVariable& solver::operator-(int x,ComplexVariable& y){
     temp->a=y.a;
     temp->b=y.b;
     temp->power=y.power;
-    temp->c=-y.c-x;
+    temp->c=-y.c.real()-x;
     return *temp;
 }
 
@@ -385,12 +385,7 @@ ComplexVariable& solver::operator==(ComplexVariable& x, ComplexVariable& y) {
     else {
         temp->b+=-y.b;
     }
-    if(y.c>0){
-        temp->c-=y.c;
-    }
-    else{
-        temp->c+=-y.c;
-    }
+    temp->c=x.c-y.c;
 
     return *temp;
 }
